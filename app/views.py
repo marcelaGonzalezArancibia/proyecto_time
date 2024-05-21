@@ -6,3 +6,7 @@ def index(request):
 
 def page_producto(request):
     return render(request,'producto.html')
+
+
+def crear_orden(request):
+    return render(request,'crear_orden.html')
