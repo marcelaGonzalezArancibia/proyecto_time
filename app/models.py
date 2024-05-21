@@ -27,5 +27,5 @@ class orden_compra(models.Model):
     correo_cliente = models.EmailField
 
     def __str__(self):
-            return self.nombre_producto
+            return self.nombre_cliente
     
