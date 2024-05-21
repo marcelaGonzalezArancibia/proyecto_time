@@ -13,4 +13,12 @@ def crear_orden(request):
     data = {
         'form': ordenForm()
     }
+
+    if request.method == 'POST':
+        formulario = ordenForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "orden agregada correctamente"
+        else:
+            data['form'] = formulario
     return render(request,'crear_orden.html',data)
