@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import ordenForm
 
 # Create your views here.
 def index(request):
@@ -9,4 +10,7 @@ def page_producto(request):
 
 
 def crear_orden(request):
-    return render(request,'crear_orden.html')
+    data = {
+        'form': ordenForm()
+    }
+    return render(request,'crear_orden.html',data)
