@@ -11,17 +11,21 @@ relojes de calidad.
 
 El objetivo de este proyecto es desarrollar un sistema de facturación que permita gestionar los productos y generar presupuestos para los clientes, solicitando los datos necesarios de la empresa.
 
+# Aclaraciones Adicionales
+
+El proyecto se desarrollará utilizando Python como lenguaje de programación y el framework Django. La instalación y configuración de Python y Django se proporcionarán en el archivo README.md del proyecto para facilitar su implementación y ejecución.
+
+Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente que satisfaga las necesidades de facturación y presupuestos de "La Máquina del Tiempo", contribuyendo así al éxito y crecimiento continuo de la empresa.
+
+
 ## Requisitos
 
 ### Requisitos Funcionales
 
 1. **Gestión de Productos:**
-     Control de inventario y stock.
      visualización de productos.
 
 3. **Gestión de Facturas:**
-     Creación y edición de facturas.
-     Asociación de facturas a clientes.
      Cálculo automático de impuestos y totales.
 
 5. **Acceso y Seguridad:**
@@ -31,11 +35,10 @@ El objetivo de este proyecto es desarrollar un sistema de facturación que permi
 ### Requisitos No Funcionales
 
 1. **Rendimiento:**
-     Manejo eficiente de múltiples usuarios simultáneos.
-     Tiempos de respuesta rápidos (menos de 2 segundos).
+   
 
 2. **Escalabilidad:**
-     Capacidad de escalar horizontal y verticalmente.
+   
      Diseño modular para facilitar la adición de nuevas funcionalidades.
 
 3. **Seguridad:**
@@ -44,7 +47,7 @@ El objetivo de este proyecto es desarrollar un sistema de facturación que permi
 
 4. **Disponibilidad:**
      Alta disponibilidad (99.9% de tiempo de actividad).
-     Respaldo y recuperación ante desastres.
+     
 
 5. **Usabilidad:**
      Interfaz intuitiva y fácil de usar.
@@ -72,7 +75,7 @@ El objetivo de este proyecto es desarrollar un sistema de facturación que permi
 ### Creación de un Entorno Virtual
 
 1. Abre el cmd y navega a la carpeta donde deseas crear el proyecto.
-2. Ejecuta los siguientes comandos:
+2. Ejecuta los siguientes comandos para poder levantar el proyecto Django
 
 ```bash
 python -m venv myenv
