@@ -7,32 +7,35 @@ Es una empresa que refleja la evolución entre el diseño, la tecnología y la v
 Para cumplir con la misión de la empresa se realizaron diferentes investigaciones y selecciones de la calidad de los relojes, permitiendo crear con éxito la empresa y abriendo las puertas al público, la máquina del tiempo se a convertido en una empresa muy popular para los amantes de los
 relojes de calidad.
 
+
 ## Objetivo del Proyecto
 
 El objetivo de este proyecto es desarrollar un sistema de facturación que permita gestionar los productos y generar presupuestos para los clientes, solicitando los datos necesarios de la empresa.
+
+# Aclaraciones Adicionales
+
+El proyecto se desarrollo utilizando Python como lenguaje de programación y Django framework. La instalación y configuración de Python y Django se proporcionarán en el archivo README.md del proyecto para facilitar su implementación y ejecución.
+
+Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente que satisfaga las necesidades de facturación y presupuestos de "La Máquina del Tiempo", contribuyendo así al éxito y crecimiento continuo de la empresa.
 
 ## Requisitos
 
 ### Requisitos Funcionales
 
 1. **Gestión de Productos:**
-     Control de inventario y stock.
      visualización de productos.
 
 3. **Gestión de Facturas:**
-     Creación y edición de facturas.
-     Asociación de facturas a clientes.
+      Asociación de facturas a clientes.
      Cálculo automático de impuestos y totales.
 
 5. **Acceso y Seguridad:**
      Autenticación segura de usuarios.
-     Registro de actividad de los usuarios.
-
+   
 ### Requisitos No Funcionales
 
 1. **Rendimiento:**
-     Manejo eficiente de múltiples usuarios simultáneos.
-     Tiempos de respuesta rápidos (menos de 2 segundos).
+
 
 2. **Escalabilidad:**
      Capacidad de escalar horizontal y verticalmente.
@@ -44,7 +47,7 @@ El objetivo de este proyecto es desarrollar un sistema de facturación que permi
 
 4. **Disponibilidad:**
      Alta disponibilidad (99.9% de tiempo de actividad).
-     Respaldo y recuperación ante desastres.
+
 
 5. **Usabilidad:**
      Interfaz intuitiva y fácil de usar.
@@ -72,7 +75,7 @@ El objetivo de este proyecto es desarrollar un sistema de facturación que permi
 ### Creación de un Entorno Virtual
 
 1. Abre el cmd y navega a la carpeta donde deseas crear el proyecto.
-2. Ejecuta los siguientes comandos:
+2. Ejecuta los siguientes comandos para comenzar a ejecutar el proyecto Django
 
 ```bash
 python -m venv myenv
