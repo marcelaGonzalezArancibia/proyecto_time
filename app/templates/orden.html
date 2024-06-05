@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+   
 </head>
 <body>
     
@@ -78,95 +78,140 @@
 
 
 
-
-
-
-    <table id="miTabla" class="table table-striped">
+    <table id="miTabla">
         <thead>
-          <tr>
-            <th id="producto"> producto</th>
-            <th id="descripcion"> descripcion</th>
-            <th id="cantidad"> cantidad</th>
-            <th id="precioUnitario"> precion unitario</th>
-            <th  id="precio total"> precio total</th>
-          </tr>
+            <tr>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <th ><input id="prod1" type="text"></th>
-            <td><input type="des1"></td>
-            <td><input type="cant1"></td>
-            <td><input type="pu1"></td>
-            <td><label id="pc1"> 1234</label></td>
-          </tr>
+            <tr>
+                <td><input id="prod1" type="text"></td>
+                <td><input id="des1" type="text"></td>
+                <td><input id="cant1" type="text" oninput="calcularTotal()"></td>
+                <td><input id="prec1" type="text" oninput="calcularTotal()"></td>
+                <td><label id="pc1">0</label></td>
+            </tr>
         </tbody>
-      </table>
-      <button onclick="agregarFila()">Agregar Fila</button>
-      <br>
-      <br>
-      <br>
-
-      <p>suma total productos</p><label >1111</label>
-      <p>iva</p><label >111</label>
-      <p>envio</p><label >111</label>
-      <p>precio total</p><label >111</label>
+    </table>
     
-
-      <script>
+    <p>Envío</p>
+    <input id="envio" type="text" oninput="calcularTotal()">
+    
+    <p>IVA (%)</p>
+    <input id="iva" type="text" oninput="calcularTotal()">
+    
+    <button onclick="agregarFila()">Agregar Fila</button>
+    
+    <script>
         let contador = 1;
+    
         function agregarFila() {
-
-           // Obtener la referencia de la tabla
-           var tabla = document.getElementById("miTabla").getElementsByTagName('tbody')[0];
             contador += 1;
-
+    
+            // Obtener la referencia de la tabla
+            var tabla = document.getElementById("miTabla").getElementsByTagName('tbody')[0];
+    
             // Crear una nueva fila
             var nuevaFila = document.createElement('tr');
-            
+    
             // Crear las celdas de la nueva fila
             var celdaProducto = document.createElement('td');
             var inputProducto = document.createElement('input');
             inputProducto.id = `prod${contador}`;
             inputProducto.type = 'text';
             celdaProducto.appendChild(inputProducto);
-            
+    
             var celdaDescripcion = document.createElement('td');
             var inputDescripcion = document.createElement('input');
             inputDescripcion.id = `des${contador}`;
             inputDescripcion.type = 'text';
             celdaDescripcion.appendChild(inputDescripcion);
-
-            var celdaCantidad1 = document.createElement('td');
-            var inputCantidad1 = document.createElement('input');
-            inputCantidad1.id = `cant${contador}`;
-            inputCantidad1.type = 'text';
-            celdaCantidad1.appendChild(inputCantidad1);
-
-            var celdaCantidad2 = document.createElement('td');
-            var inputCantidad2 = document.createElement('input');
-            inputCantidad2.id = `prec${contador}`;
-            inputCantidad2.type = 'text';
-            celdaCantidad2.appendChild(inputCantidad2);
-
+    
+            var celdaCantidad = document.createElement('td');
+            var inputCantidad = document.createElement('input');
+            inputCantidad.id = `cant${contador}`;
+            inputCantidad.type = 'text';
+            inputCantidad.addEventListener('input', function() {
+                calcularTotal();
+            });
+            celdaCantidad.appendChild(inputCantidad);
+    
+            var celdaPrecio = document.createElement('td');
+            var inputPrecio = document.createElement('input');
+            inputPrecio.id = `prec${contador}`;
+            inputPrecio.type = 'text';
+            inputPrecio.addEventListener('input', function() {
+                calcularTotal();
+            });
+            celdaPrecio.appendChild(inputPrecio);
+    
             var celdaCostoTotal = document.createElement('td');
             var labelCostoTotal = document.createElement('label');
             labelCostoTotal.id = `pc${contador}`;
-            labelCostoTotal.textContent = '1234';
+            labelCostoTotal.textContent = '0';
             celdaCostoTotal.appendChild(labelCostoTotal);
-
+    
             // Añadir las celdas a la nueva fila
             nuevaFila.appendChild(celdaProducto);
             nuevaFila.appendChild(celdaDescripcion);
-            nuevaFila.appendChild(celdaCantidad1);
-            nuevaFila.appendChild(celdaCantidad2);
+            nuevaFila.appendChild(celdaCantidad);
+            nuevaFila.appendChild(celdaPrecio);
             nuevaFila.appendChild(celdaCostoTotal);
-
+    
             // Añadir la nueva fila a la tabla
             tabla.appendChild(nuevaFila);
-
-
+        }
+    
+        function calcularTotal() {
+            // Obtener todas las filas de la tabla
+            var filas = document.getElementById("miTabla").getElementsByTagName('tr');
+            
+            // Variable para almacenar el total
+            var totalGeneral = 0;
+            
+            // Iterar sobre las filas (empezando desde la segunda fila, ya que la primera es la cabecera)
+            for (var i = 1; i < filas.length; i++) {
+                var fila = filas[i];
+                var inputsCantidad = fila.querySelector(`#cant${i}`);
+                var inputsPrecio = fila.querySelector(`#prec${i}`);
+                var labelTotal = fila.querySelector(`#pc${i}`);
+                
+                // Obtener el valor de cantidad y precio de la fila actual
+                var cantidad = parseFloat(inputsCantidad.value) || 0;
+                var precio = parseFloat(inputsPrecio.value) || 0;
+                
+                // Calcular el total y mostrarlo en la etiqueta correspondiente
+                var totalFila = cantidad * precio;
+                labelTotal.textContent = totalFila.toFixed(2);
+                
+                // Agregar el total de la fila al total general
+                totalGeneral += totalFila;
+            }
+            
+            // Obtener el valor de envío
+            var envio = parseFloat(document.getElementById('envio').value) || 0;
+            
+            // Obtener el valor del IVA (%)
+            var porcentajeIVA = parseFloat(document.getElementById('iva').value) || 0;
+            
+            // Calcular el valor del IVA
+            var valorIVA = totalGeneral * (porcentajeIVA / 100);
+            
+            // Sumar el envío y el valor del IVA al total general
+            totalGeneral += envio + valorIVA;
+            
+            // Mostrar el total general
+            document.getElementById('totalGeneral').textContent = totalGeneral.toFixed(2);
         }
     </script>
-</body>
+    
+    <p>Total General: <span id="totalGeneral">0</span></p>
+    
+    </body>
 
 </html>
