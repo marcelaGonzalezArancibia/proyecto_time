@@ -53,6 +53,8 @@ def crearorden(request):
         totalproductos = request.POST.getlist('totalproducto')
 
         for producto, descripcion, cantidad, precio, totalproducto in zip(productos, descripciones, cantidades, precios, totalproductos):
+            print('guardando producto')
+            print(producto)
             ProductoOrden.objects.create(
                 orden=orden_instance,
                 producto=producto,
@@ -66,4 +68,7 @@ def crearorden(request):
     return render(request, 'crearorden.html')
 
    
- 
+def listadoorden(request):
+    ordenes = orden.objects.all()  # Obtener todas las órdenes
+    return render(request, 'listadoorden.html',{'ordenes': ordenes})
+    

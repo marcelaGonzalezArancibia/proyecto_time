@@ -50,7 +50,7 @@ class orden(models.Model):
     def __str__(self):
         return self.nombrevendedor
 class ProductoOrden(models.Model):
-    orden = models.ForeignKey('Orden', on_delete=models.CASCADE, related_name='productos')
+    orden = models.ForeignKey(orden, on_delete=models.CASCADE, related_name='productos')
     producto = models.CharField(max_length=90)
     descripcion = models.TextField()
     cantidad = models.IntegerField()
