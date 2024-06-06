@@ -10,38 +10,47 @@
 
 </head>
 
-<body>
+<body style="background-color: rgb(218, 226, 237);">
+    <hr>
+    <h1 style="text-align: center;">crear orden </h1>
+    <hr>
+   
+    
 
     <div class="container text-center">
+        <div style="display: table;">
+            <td> <button  class="btn active btn-danger" data-bs-toggle="button" aria-pressed="true" onclick="window.location.href='{% url 'index' %}'">cerrar sesion</button></td>
+            <td> <button  class="btn active btn-warning" data-bs-toggle="button" aria-pressed="true" onclick="window.location.href='{% url 'listadoorden' %}'">listado ordenes</button></td>    
+        </div>
         <form method="post">
             {% csrf_token %}
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card" style="margin: 10px;">
                         <div class="card-body">
-                            <div class="form-group">
-                                <p>Nombre vendedor:</p>
-                                <input type="text" class="form-control" name="nombrevendedor">
+                            <div class="form-group row">
+                                <p class="col-4">Nombre vendedor:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="nombrevendedor"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Rut vendedor:</p>
-                                <input type="text" class="form-control" name="rutvendedor">
+                            <div class="form-group row">
+                                <p class="col-4">Rut vendedor:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="rutvendedor"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Empresa:</p>
-                                <input type="text" class="form-control" name="nombreempresa">
+                            <div class="form-group row">
+                                <p class="col-4">Empresa:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="nombreempresa"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Direccion:</p>
-                                <input type="text" class="form-control" name="direccionv">
+                            <div class="form-group row">
+                                <p class="col-4">Direccion:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="direccionv"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Telefono:</p>
-                                <input type="text" class="form-control" name="telefonov">
+                            <div class="form-group row">
+                                <p class="col-4">Telefono:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="telefonov"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Correo:</p>
-                                <input type="text" class="form-control" name="correovendedor">
+                            <div class="form-group row">
+                                <p class="col-4">Correo:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="correovendedor"></div>
                             </div>
                         </div>
                     </div>
@@ -49,25 +58,25 @@
                 <div class="col-md-6">
                     <div class="card" style="margin: 10px;">
                         <div class="card-body">
-                            <div class="form-group">
-                                <p>Nombre Cliente:</p>
-                                <input type="text" class="form-control" name="nombrecliente">
+                            <div class="form-group row">
+                                <p class="col-4">Nombre Cliente:</p>
+                                <div class="col-8"> <input type="text" class="form-control" name="nombrecliente"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Rut Cliente:</p>
-                                <input type="text" class="form-control" name="rutcliente">
+                            <div class="form-group row">
+                                <p class="col-4">Rut Cliente:</p>
+                                <div class="col-8"> <input type="text" class="form-control" name="rutcliente"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Direccion:</p>
-                                <input type="text" class="form-control" name="direccioncliente">
+                            <div class="form-group row">
+                                <p class="col-4">Direccion:</p>
+                                <div class="col-8"><input type="text" class="form-control" name="direccioncliente"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Correo:</p>
-                                <input type="text" class="form-control" name="correo">
+                            <div class="form-group row">
+                                <p class="col-4">Correo:</p>
+                                <div class="col-8"> <input type="text" class="form-control" name="correo"></div>
                             </div>
-                            <div class="form-group">
-                                <p>Telefono:</p>
-                                <input type="text" class="form-control" name="telefonoc">
+                            <div class="form-group row">
+                                <p class="col-4">Telefono:</p>
+                                <div class="col-8"> <input type="text" class="form-control" name="telefonoc"></div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +92,7 @@
 
 
 
-            <table id="miTabla">
+            <table id="miTabla" style="width: 100%;" class="mb-4">
                 <thead>
                     <tr>
                         <th>Producto</th>
@@ -95,34 +104,54 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="producto" type="text" name="producto"></td>
-                        <td><input id="descripcion" type="text" name="descripcion"></td>
-                        <td><input id="cantidad" type="text" name="cantidad" oninput="calcularTotal()"></td>
-                        <td><input id="preciounidad" type="text" name="preciounidad" oninput="calcularTotal()"></td>
-                        <td><input id="totalproducto" type="text" name="totalproducto" value="0"></td>
+                        <td><input id="producto" type="text" class="form-control"name="producto"></td>
+                       
+
+                        <td> <input id="descripcion" type="text" class="form-control"name="descripcion"></td>
+                        <td><input id="cantidad" type="text" class="form-control"name="cantidad" oninput="calcularTotal()"></td>
+                        <td><input id="preciounidad" type="text" class="form-control" name="preciounidad" oninput="calcularTotal()"></td>
+                        <td><input id="totalproducto" type="text" class="form-control" name="totalproducto" value="0"></td>
                     </tr>
                 </tbody>
             </table>
-            <p>Total productos: <input id="valorNeto" name="valorNeto"></p>
-
-            <p>Envío</p>
-            <input id="valorenvio" type="text" name="valorenvio" oninput="calcularTotal()">
-
-            <p>IVA (%)</p>
-            <input id="iva" type="text" name="iva" oninput="calcularTotal()">
-
-            <p>Total General: <input id="TotalAPagar" type="text" name="TotalAPagar" value="0"></p>
             
             
-            <button type="submit" class="btn btn-primary">Guardar Orden</button>
+            
+            <table class="table">
+                <thead>
+                  <tr>
+                   
+                    <th scope="col">Precio Envio</th>
+                    <th scope="col">Precio Iva </th>
+                    <th scope="col">precio Total Productos</th>
+                    <th scope="col">Precio Total A Pagar</th>
+                    <th  scope="col">opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> <input id="valorenvio" type="text" name="valorenvio" class="form-control" oninput="calcularTotal()"></td>
+                    <td> <input id="iva" type="text" name="iva" class="form-control" oninput="calcularTotal()"></td>
+                    <td><input id="valorNeto" name="valorNeto" class="form-control"></td>
+                    <td><input id="TotalAPagar" type="text" class="form-control" name="TotalAPagar" value="0"></td>
+                   
+                    <td> <button type="submit" class="btn active btn-primary" data-bs-toggle="button" aria-pressed="true">Guardar Orden</button></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
 
-
-            <br>
-            <br>
-            <br>
+        
            
         </form>
-        <button onclick="agregarFila()">Agregar Fila</button>
+     
+        
+        <div class="d-grid gap-2">
+            <button  onclick="agregarFila()" class="btn active btn-success" data-bs-toggle="button" aria-pressed="true">Agregar filas</button>
+        </div>
+        <br>
+        <br>
+        <br>
     </div>
     
     <script>
@@ -141,6 +170,7 @@
             inputProducto.id = `producto`;
             inputProducto.type = 'text';
             inputProducto.name = `producto`;
+            inputProducto.className = 'form-control';
             celdaProducto.appendChild(inputProducto);
 
             var celdaDescripcion = document.createElement('td');
@@ -148,6 +178,7 @@
             inputDescripcion.id = `descripcion`;
             inputDescripcion.type = 'text';
             inputDescripcion.name = `descripcion`;
+            inputDescripcion.className = 'form-control';
             celdaDescripcion.appendChild(inputDescripcion);
 
             var celdaCantidad = document.createElement('td');
@@ -155,6 +186,7 @@
             inputCantidad.id = `cantidad`;
             inputCantidad.type = 'text';
             inputCantidad.name = `cantidad`;
+            inputCantidad.className = 'form-control';
             inputCantidad.addEventListener('input', function() {
                 calcularTotal();
             });
@@ -165,6 +197,7 @@
             inputPrecio.id = `preciounidad`;
             inputPrecio.type = 'text';
             inputPrecio.name = `preciounidad`;
+            inputPrecio.className = 'form-control';
             inputPrecio.addEventListener('input', function() {
                 calcularTotal();
             });
@@ -176,6 +209,7 @@
             inputCostoTotal.value = '0';
             inputCostoTotal.id = `totalproducto`;
             inputCostoTotal.name = `totalproducto`;
+            inputCostoTotal.className = 'form-control';
             celdaCostoTotal.appendChild(inputCostoTotal);
 
             // Añadir las celdas a la nueva fila
