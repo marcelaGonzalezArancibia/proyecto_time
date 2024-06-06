@@ -1,8 +1,8 @@
 
 from django.urls import path
-from .views import index,orden
+from .views import index,crearorden
 
 urlpatterns = [
     path('', index,name='index'),
-    path('orden',orden,name='orden'),
+    path('crearorden',crearorden,name='crearorden'),
 ]

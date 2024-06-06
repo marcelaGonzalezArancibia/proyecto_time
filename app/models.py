@@ -42,16 +42,21 @@ class orden(models.Model):
     correo = models.CharField(max_length=90)
     telefonoc = models.IntegerField(default=0)
 
+    valorNeto= models.IntegerField(default=0)
+    iva = models.IntegerField(default=0)
+    valorenvio = models.IntegerField(default=0)
+    TotalAPagar = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.nombrevendedor
+class ProductoOrden(models.Model):
+    orden = models.ForeignKey('Orden', on_delete=models.CASCADE, related_name='productos')
     producto = models.CharField(max_length=90)
     descripcion = models.TextField()
     cantidad = models.IntegerField()
     preciounidad = models.IntegerField()
-    preciototal = models.IntegerField()
-    sumatotal = models.IntegerField()
-    iva = models.IntegerField()
-    valorenvio = models.IntegerField()
-    preciototal = models.IntegerField()
+    totalproducto = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.nombrevendedor
+        return self.descripcion
             
