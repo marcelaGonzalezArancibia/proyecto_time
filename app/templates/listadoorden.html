@@ -8,7 +8,9 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+
     <h1>Listado de Órdenes</h1>
+    <hr>
     {% for orden in ordenes %}
     <h2>Orden {{ orden.id }}</h2>
     <ul>
@@ -63,6 +65,7 @@
         
     </ul>
 {% endfor %}
+<hr>
 
 
 </body>
