@@ -24,6 +24,9 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 
 1. **Gestión de Productos:**
      visualización de productos.
+   
+2. **login:**
+     ingreso de personas que se encuentren registradas 
 
 3. **Gestión de Facturas:**
      Cálculo automático de impuestos y totales.
@@ -65,6 +68,7 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 
 - **Lenguaje de Programación:** Python
 - **Framework:** Django
+-  **BD:** SQlite3
 
 ## Instalación
 
