@@ -75,10 +75,20 @@ def listadoorden(request):
    
     return render(request, 'listadoorden.html', {'ordenes': ordenes})
 
-def detalleorden(request, orden_id):
-    orden_instance = get_object_or_404(orden, pk=orden_id)
-    productos = ProductoOrden.objects.filter(orden=orden_instance)
-    return render(request, 'detalleorden.html', {'orden': orden_instance, 'productos': productos})
+def listadoorden(request):
+    ordenes = orden.objects.all()  # Obtener todas las órdenes
+
+    if request.method == 'POST':
+        # Verificar si se presionó el botón de modificar
+        if 'modificar' in request.POST:
+            orden_id = request.POST.get('orden_id')
+            orden_instance = get_object_or_404(orden, id=orden_id)
+            orden_instance.estado = 'rectificada'  # Activar estado "Rectificada"
+            orden_instance.save()
+            return redirect('listadoorden')
+
+    return render(request, 'listadoorden.html', {'ordenes': ordenes})
+
 
 
 
