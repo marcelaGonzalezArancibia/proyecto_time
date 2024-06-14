@@ -50,3 +50,4 @@ class EntregaForm(forms.ModelForm):
         widgets = {
             'motivo_rechazo': forms.Textarea(attrs={'rows': 3}),
         }
+      

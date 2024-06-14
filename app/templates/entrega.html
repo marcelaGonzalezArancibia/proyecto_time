@@ -1,3 +1,5 @@
+<!-- entrega_orden.html -->
+<!DOCTYPE html>
 <html>
 <head>
     <title>Entrega de la Orden</title>
@@ -9,5 +11,23 @@
         {{ form.as_p }}
         <button type="submit">Guardar Cambios</button>
     </form>
+
+    <h2>Historial de Rechazos</h2>
+    <ul>
+        {% for rechazo in orden.rechazos.all %}
+            <li>{{ rechazo.fecha }}: {{ rechazo.motivo }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Historial de entrega</h2>
+    <p>{{orden.estadoentrega}}</p>
+    <p>{{orden.direccion_entrega}}</p>
+    <p>{{orden.rut_receptor}}</p>
+    {% if orden.foto_entrega %}
+        <p>Foto de entrega:</p>
+        <img src="{{ orden.foto_entrega.url }}" alt="Foto de entrega">
+    {% else %}
+        <p>No hay foto de entrega disponible.</p>
+    {% endif %}
 </body>
 </html>
