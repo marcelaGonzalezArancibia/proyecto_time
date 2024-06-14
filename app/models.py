@@ -27,6 +27,7 @@ from django.db import models
 #precio total
 
 
+
 class orden(models.Model):
     id = models.AutoField(primary_key=True) 
 
@@ -47,7 +48,13 @@ class orden(models.Model):
     iva = models.IntegerField(default=0)
     valorenvio = models.IntegerField(default=0)
     TotalAPagar = models.IntegerField(default=0)
-    
+    ESTADO_CHOICES = (
+        ('creada', 'creada'),
+        ('rectificada', 'Rectificada'),
+        
+    )
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='creada')
+
     def __str__(self):
         return self.nombrevendedor
 class ProductoOrden(models.Model):
@@ -55,9 +62,3 @@ class ProductoOrden(models.Model):
     producto = models.CharField(max_length=90)
     descripcion = models.TextField()
     cantidad = models.IntegerField()
-    preciounidad = models.IntegerField()
-    totalproducto = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.descripcion
-            
