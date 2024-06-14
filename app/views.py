@@ -75,6 +75,11 @@ def listadoorden(request):
    
     return render(request, 'listadoorden.html', {'ordenes': ordenes})
 
+def detalleorden(request, orden_id):
+    orden_instance = get_object_or_404(orden, pk=orden_id)
+    productos = ProductoOrden.objects.filter(orden=orden_instance)
+    return render(request, 'detalleorden.html', {'orden': orden_instance, 'productos': productos})
+
 
 
  
