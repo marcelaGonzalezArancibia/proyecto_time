@@ -62,3 +62,10 @@ class ProductoOrden(models.Model):
     producto = models.CharField(max_length=90)
     descripcion = models.TextField()
     cantidad = models.IntegerField()
+    preciounidad = models.IntegerField()
+    totalproducto = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.descripcion
+            
+
