@@ -29,6 +29,7 @@ from django.db import models
 
 class orden(models.Model):
     id = models.AutoField(primary_key=True) 
+
     nombrevendedor = models.CharField(max_length=90) 
     rutvendedor = models.CharField(max_length=9)
     nombreempresa = models.CharField(max_length=90)
@@ -46,7 +47,7 @@ class orden(models.Model):
     iva = models.IntegerField(default=0)
     valorenvio = models.IntegerField(default=0)
     TotalAPagar = models.IntegerField(default=0)
-
+    
     def __str__(self):
         return self.nombrevendedor
 class ProductoOrden(models.Model):

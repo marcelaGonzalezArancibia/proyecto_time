@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import orden, ProductoOrden
-
+from django.shortcuts import render, get_object_or_404
+from .forms import OrdenForm, ProductoOrdenForm
 
 # Create your views here.
 def index(request):
@@ -67,8 +68,13 @@ def crearorden(request):
 
     return render(request, 'crearorden.html')
 
-   
+
 def listadoorden(request):
     ordenes = orden.objects.all()  # Obtener todas las órdenes
-    return render(request, 'listadoorden.html',{'ordenes': ordenes})
-    
+
+   
+    return render(request, 'listadoorden.html', {'ordenes': ordenes})
+
+
+
+ 
