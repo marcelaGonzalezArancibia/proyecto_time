@@ -51,20 +51,16 @@ class orden(models.Model):
     ESTADO_CHOICES = (
         ('creada', 'creada'),
         ('rectificada', 'Rectificada'),
+        ('por entregar', 'por entregar'),
+        ('entregada', 'entregada'),
+        ('rechazada', 'rechazada'),
+        
         
     )
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='creada')
+    estadoentrega=models.CharField(max_length=20, choices=ESTADO_CHOICES, default='por entregar')
 
-    ESTADO_CHOICES = (
-        ('por_entregar', 'Por entregar'),
-        ('entregado', 'Entregado'),
-        ('rechazado', 'Rechazado'),
-    )
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='por_entregar')
-    motivo_rechazo = models.TextField(blank=True, null=True)
-    direccion_entrega = models.CharField(max_length=255, blank=True, null=True)
-    rut_recibe = models.CharField(max_length=20, blank=True, null=True)
-    evidencia_entrega = models.ImageField(upload_to='evidencias/', blank=True, null=True)
+    
 
     def __str__(self):
         return self.nombrevendedor

@@ -24,8 +24,10 @@
          
           <th scope="col">Codigo orden</th>
           <th scope="col">Estado de rectificaciones</th>
+          <th scope="col">Estado de entrega</th>
           <th scope="col">Opciones</th>
-         
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -33,8 +35,10 @@
         <tr>
           <td>Orden: {{ orden.id }}</td>
           <td><li>{{ orden.estado }}</li></td>
+          <td><li>{{ orden.estadoentrega }}</li></td>
           <td><a href="{% url 'modificar' orden.id %}">Modificar</a></td>
           <td><a href="{% url 'detalleorden' orden.id %}">Ver Orden</a></td>
+          <td><a href="">entrega</a></td>
         </tr>
         {% endfor %}
        

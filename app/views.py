@@ -81,6 +81,7 @@ def listadoorden(request):
             orden_instance.estado = 'rectificada'  # Activar estado "Rectificada"
             orden_instance.save()
             return redirect('listadoorden')
+        
 
     return render(request, 'listadoorden.html', {'ordenes': ordenes})
 
