@@ -7,5 +7,5 @@ urlpatterns = [
     path('crearorden',crearorden,name='crearorden'),
     path('listadoorden',listadoorden,name='listadoorden'),
     path('detalleorden/<int:orden_id>/',detalleorden,name='detalleorden'),
-   
+    path('modificar/<int:orden_id>/',modificar,name='modificar')
 ]
