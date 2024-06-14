@@ -69,7 +69,7 @@ class orden(models.Model):
 
     def __str__(self):
         return self.nombrevendedor
-    
+   
 class ProductoOrden(models.Model):
     orden = models.ForeignKey(orden, on_delete=models.CASCADE, related_name='productos')
     producto = models.CharField(max_length=90)
@@ -82,3 +82,10 @@ class ProductoOrden(models.Model):
         return self.descripcion
             
 
+class RechazoHistorial(models.Model):
+    orden = models.ForeignKey(orden, related_name='rechazos', on_delete=models.CASCADE)
+    motivo = models.TextField()
+    
+
+    def __str__(self):
+        return f"Rechazo de {self.orden.id}"
