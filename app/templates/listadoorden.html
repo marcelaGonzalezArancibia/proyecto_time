@@ -38,7 +38,7 @@
           <td><li>{{ orden.estadoentrega }}</li></td>
           <td><a href="{% url 'modificar' orden.id %}">Modificar</a></td>
           <td><a href="{% url 'detalleorden' orden.id %}">Ver Orden</a></td>
-          <td><a href="">entrega</a></td>
+          <td><a href="{% url 'entrega' orden.id%}">entrega</a></td>
         </tr>
         {% endfor %}
        

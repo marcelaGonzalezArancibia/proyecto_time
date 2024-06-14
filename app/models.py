@@ -51,19 +51,25 @@ class orden(models.Model):
     ESTADO_CHOICES = (
         ('creada', 'creada'),
         ('rectificada', 'Rectificada'),
+          
+    )
+    ESTADOENTREGA_CHOICES = (
         ('por entregar', 'por entregar'),
         ('entregada', 'entregada'),
-        ('rechazada', 'rechazada'),
-        
-        
+        ('rechazada', 'rechazada'),    
     )
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='creada')
-    estadoentrega=models.CharField(max_length=20, choices=ESTADO_CHOICES, default='por entregar')
+    estadoentrega=models.CharField(max_length=20, choices=ESTADOENTREGA_CHOICES, default='por entregar')
 
-    
+   
+    motivo_rechazo = models.TextField(blank=True, null=True)
+    direccion_entrega = models.CharField(max_length=255, blank=True, null=True)
+    rut_receptor = models.CharField(max_length=12, blank=True, null=True)
+    foto_entrega = models.ImageField(upload_to='fotos_entrega/', blank=True, null=True)
 
     def __str__(self):
         return self.nombrevendedor
+    
 class ProductoOrden(models.Model):
     orden = models.ForeignKey(orden, on_delete=models.CASCADE, related_name='productos')
     producto = models.CharField(max_length=90)

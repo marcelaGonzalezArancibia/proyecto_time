@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import orden, ProductoOrden
 from django.shortcuts import render, get_object_or_404
-from .forms import OrdenForm, ProductoOrdenForm
+from .forms import OrdenForm, ProductoOrdenForm,EntregaForm
 
 # Create your views here.
 def index(request):
@@ -151,3 +151,15 @@ def modificar(request, orden_id):
         'orden_instance': orden_instance,
     })
 
+def entrega(request,orden_id):
+    Orden = get_object_or_404(orden, id=orden_id)
+   
+    if request.method == 'POST':
+        form = EntregaForm(request.POST, request.FILES, instance=Orden)
+        if form.is_valid():
+            form.save()
+            return redirect('listadoorden')  # Asegúrate de tener una vista con este nombre
+    else:
+        form = EntregaForm(instance=Orden)
+        
+    return render(request, 'entrega.html', {'form': form, 'orden': orden})

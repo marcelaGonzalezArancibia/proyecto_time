@@ -43,3 +43,10 @@ class ProductoOrdenForm(forms.ModelForm):
             'preciounidad': forms.NumberInput(attrs={'class': 'form-control'}),
             'totalproducto': forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
         }
+class EntregaForm(forms.ModelForm):
+    class Meta:
+        model = orden
+        fields = ['estadoentrega', 'motivo_rechazo', 'direccion_entrega', 'rut_receptor', 'foto_entrega']
+        widgets = {
+            'motivo_rechazo': forms.Textarea(attrs={'rows': 3}),
+        }
