@@ -30,27 +30,27 @@
                         <div class="card-body">
                             <div class="form-group row">
                                 <p class="col-4">Nombre vendedor:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="nombrevendedor"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="nombrevendedor" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Rut vendedor:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="rutvendedor"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="rutvendedor" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Empresa:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="nombreempresa"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="nombreempresa" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Direccion:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="direccionv"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="direccionv" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Telefono:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="telefonov"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="telefonov" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Correo:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="correovendedor"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="correovendedor" required></div>
                             </div>
                         </div>
                     </div>
@@ -60,23 +60,23 @@
                         <div class="card-body">
                             <div class="form-group row">
                                 <p class="col-4">Nombre Cliente:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="nombrecliente"></div>
+                                <div class="col-8"> <input type="text" class="form-control" name="nombrecliente" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Rut Cliente:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="rutcliente"></div>
+                                <div class="col-8"> <input type="text" class="form-control" name="rutcliente" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Direccion:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="direccioncliente"></div>
+                                <div class="col-8"><input type="text" class="form-control" name="direccioncliente" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Correo:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="correo"></div>
+                                <div class="col-8"> <input type="text" class="form-control" name="correo" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Telefono:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="telefonoc"></div>
+                                <div class="col-8"> <input type="text" class="form-control" name="telefonoc" required></div>
                             </div>
                         </div>
                     </div>
@@ -104,13 +104,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="producto" type="text" class="form-control"name="producto"></td>
+                        <td><input id="producto" type="text" class="form-control"name="producto" required></td>
                        
 
-                        <td> <input id="descripcion" type="text" class="form-control"name="descripcion"></td>
-                        <td><input id="cantidad" type="text" class="form-control"name="cantidad" oninput="calcularTotal()"></td>
-                        <td><input id="preciounidad" type="text" class="form-control" name="preciounidad" oninput="calcularTotal()"></td>
-                        <td><input id="totalproducto" type="text" class="form-control" name="totalproducto" value="0"></td>
+                        <td> <input id="descripcion" type="text" class="form-control"name="descripcion" required></td>
+                        <td><input id="cantidad" type="text" class="form-control"name="cantidad" oninput="calcularTotal()" required></td>
+                        <td><input id="preciounidad" type="text" class="form-control" name="preciounidad" oninput="calcularTotal()" required></td>
+                        <td><input id="totalproducto" type="text" class="form-control" name="totalproducto" value="0" ></td>
                     </tr>
                 </tbody>
             </table>
@@ -130,8 +130,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td> <input id="valorenvio" type="text" name="valorenvio" class="form-control" oninput="calcularTotal()"></td>
-                    <td> <input id="iva" type="text" name="iva" class="form-control" oninput="calcularTotal()"></td>
+                    <td> <input id="valorenvio" type="text" name="valorenvio" class="form-control" oninput="calcularTotal()" required></td>
+                    <td> <input id="iva" type="text" name="iva" class="form-control" oninput="calcularTotal()" required></td>
                     <td><input id="valorNeto" name="valorNeto" class="form-control"></td>
                     <td><input id="TotalAPagar" type="text" class="form-control" name="TotalAPagar" value="0"></td>
                    
@@ -260,6 +260,7 @@
             // Obtener el valor del IVA (%)
             var porcentajeIVA = parseFloat(document.getElementById('iva').value) || 0;
 
+            
             // Calcular el valor del IVA
             var valorIVA = totalGeneral * (porcentajeIVA / 100);
 

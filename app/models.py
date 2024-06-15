@@ -27,8 +27,10 @@ from django.db import models
 #precio total
 
 
+
 class orden(models.Model):
     id = models.AutoField(primary_key=True) 
+
     nombrevendedor = models.CharField(max_length=90) 
     rutvendedor = models.CharField(max_length=9)
     nombreempresa = models.CharField(max_length=90)
@@ -46,9 +48,28 @@ class orden(models.Model):
     iva = models.IntegerField(default=0)
     valorenvio = models.IntegerField(default=0)
     TotalAPagar = models.IntegerField(default=0)
+    ESTADO_CHOICES = (
+        ('creada', 'creada'),
+        ('rectificada', 'Rectificada'),
+          
+    )
+    ESTADOENTREGA_CHOICES = (
+        ('por entregar', 'por entregar'),
+        ('entregada', 'entregada'),
+        ('rechazada', 'rechazada'),    
+    )
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='creada')
+    estadoentrega=models.CharField(max_length=20, choices=ESTADOENTREGA_CHOICES, default='por entregar')
+
+   
+    motivo_rechazo = models.TextField(blank=True, null=True)
+    direccion_entrega = models.CharField(max_length=255, blank=True, null=True)
+    rut_receptor = models.CharField(max_length=12, blank=True, null=True)
+    foto_entrega = models.ImageField(upload_to='fotos_entrega/', blank=True, null=True)
 
     def __str__(self):
         return self.nombrevendedor
+   
 class ProductoOrden(models.Model):
     orden = models.ForeignKey(orden, on_delete=models.CASCADE, related_name='productos')
     producto = models.CharField(max_length=90)
@@ -60,3 +81,11 @@ class ProductoOrden(models.Model):
     def __str__(self):
         return self.descripcion
             
+
+class RechazoHistorial(models.Model):
+    orden = models.ForeignKey(orden, related_name='rechazos', on_delete=models.CASCADE)
+    motivo = models.TextField()
+    
+
+    def __str__(self):
+        return f"Rechazo de {self.orden.id}"

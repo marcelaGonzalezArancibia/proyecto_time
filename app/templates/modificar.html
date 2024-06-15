@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Orden</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tu propio archivo CSS -->
+  
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Modificar Orden</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <a href="{% url 'listadoorden' %}">cancelar</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">Información del Vendedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ orden_form.nombrevendedor.label_tag }}</td>
+                        <td>{{ orden_form.nombrevendedor }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.rutvendedor.label_tag }}</td>
+                        <td>{{ orden_form.rutvendedor }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.nombreempresa.label_tag }}</td>
+                        <td>{{ orden_form.nombreempresa }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.direccionv.label_tag }}</td>
+                        <td>{{ orden_form.direccionv }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.telefonov.label_tag }}</td>
+                        <td>{{ orden_form.telefonov }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.correovendedor.label_tag }}</td>
+                        <td>{{ orden_form.correovendedor }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">Información del Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ orden_form.nombrecliente.label_tag }}</td>
+                        <td>{{ orden_form.nombrecliente }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.rutcliente.label_tag }}</td>
+                        <td>{{ orden_form.rutcliente }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.direccioncliente.label_tag }}</td>
+                        <td>{{ orden_form.direccioncliente }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.correo.label_tag }}</td>
+                        <td>{{ orden_form.correo }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.telefonoc.label_tag }}</td>
+                        <td>{{ orden_form.telefonoc }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">Detalles de Pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ orden_form.valorNeto.label_tag }}</td>
+                        <td>{{ orden_form.valorNeto }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.iva.label_tag }}</td>
+                        <td>{{ orden_form.iva }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.valorenvio.label_tag }}</td>
+                        <td>{{ orden_form.valorenvio }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ orden_form.TotalAPagar.label_tag }}</td>
+                        <td>{{ orden_form.TotalAPagar }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Productos</h2>
+            {% for producto_form in productos_forms %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Producto {{ forloop.counter }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ producto_form.producto.label_tag }}</td>
+                            <td>{{ producto_form.producto }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ producto_form.descripcion.label_tag }}</td>
+                            <td>{{ producto_form.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ producto_form.cantidad.label_tag }}</td>
+                            <td>{{ producto_form.cantidad }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ producto_form.preciounidad.label_tag }}</td>
+                            <td>{{ producto_form.preciounidad }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ producto_form.totalproducto.label_tag }}</td>
+                            <td>{{ producto_form.totalproducto }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+            <input type="hidden" name="modificar" value="1">
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+    </div>
+    <!-- Enlace a Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

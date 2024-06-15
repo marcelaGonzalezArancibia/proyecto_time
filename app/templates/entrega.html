@@ -1,0 +1,52 @@
+<!-- entrega_orden.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entrega de la Orden</title>
+</head>
+<body>
+    <h1>Entrega de la Orden {{ orden.id }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_estadoentrega">Estado de Entrega:</label>
+            {{ form.estadoentrega }}
+        </div>
+        <div class="form-group">
+            <label for="id_motivo_rechazo">Motivo de Rechazo:</label>
+            {{ form.motivo_rechazo }}
+        </div>
+        <div class="form-group">
+            <label for="id_direccion_entrega">Dirección de Entrega:</label>
+            {{ form.direccion_entrega }}
+        </div>
+        <div class="form-group">
+            <label for="id_rut_receptor">RUT del Receptor:</label>
+            {{ form.rut_receptor }}
+        </div>
+        <div class="form-group">
+            <label for="id_foto_entrega">Foto de Entrega:</label>
+            {{ form.foto_entrega }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+
+    <h2>Historial de Rechazos</h2>
+    <ul>
+        {% for rechazo in orden.rechazos.all %}
+            <li>{{ rechazo.fecha }}: {{ rechazo.motivo }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Historial de entrega</h2>
+    <p>{{orden.estadoentrega}}</p>
+    <p>{{orden.direccion_entrega}}</p>
+    <p>{{orden.rut_receptor}}</p>
+    {% if orden.foto_entrega %}
+        <p>Foto de entrega:</p>
+        <img src="{{ orden.foto_entrega.url }}" alt="Foto de entrega">
+    {% else %}
+        <p>No hay foto de entrega disponible.</p>
+    {% endif %}
+</body>
+</html>
