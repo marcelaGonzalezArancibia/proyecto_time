@@ -14,7 +14,10 @@
         <h1 class="mt-4">Modificar Orden</h1>
         <form method="POST">
             {% csrf_token %}
-            <a href="{% url 'listadoorden' %}">cancelar</a>
+            
+            <div class="p-2">
+                <button type="button" class="btn btn-outline-danger" onclick="window.location.href='{% url 'listadoorden' %}'">Cancelar</button>
+            </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -138,7 +141,11 @@
                 </table>
             {% endfor %}
             <input type="hidden" name="modificar" value="1">
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            
+            <div class="p-2">
+                <button type="submit"  class="btn btn-outline-success">Guardar Cambios</button>
+            </div>
+            
         </form>
     </div>
     <!-- Enlace a Bootstrap JS y dependencias -->
