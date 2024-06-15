@@ -3,6 +3,11 @@ from .models import orden, ProductoOrden,RechazoHistorial
 from django.shortcuts import render, get_object_or_404
 from .forms import OrdenForm, ProductoOrdenForm,EntregaForm
 
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
+
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -166,3 +171,28 @@ def entrega(request, orden_id):
         form = EntregaForm(instance=orden_obj)
         
     return render(request, 'entrega.html', {'form': form, 'orden': orden_obj})
+
+class DetalleOrdenPDF(View):
+     def get(self, request, *args, **kwargs):
+            # Obtener la orden y los productos
+        orden_id = kwargs.get('orden_id')  # Obtén el ID de la orden de la URL o como lo tengas
+        Orden = orden.objects.get(pk=orden_id)
+        productos = ProductoOrden.objects.filter(orden=Orden)
+
+        # Renderizar la plantilla con los datos
+        template_path = 'detalleorden.html'
+        context = {'orden': Orden, 'productos': productos}
+        template = get_template(template_path)
+        html = template.render(context)
+
+        # Crear un objeto HttpResponse con el contenido PDF
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="detalle_orden.pdf"'
+
+        # Convertir HTML a PDF
+        pisa_status = pisa.CreatePDF(
+            html, dest=response, encoding='utf-8')
+
+        if pisa_status.err:
+            return HttpResponse('Error al generar PDF: %s' % html)
+        return response
