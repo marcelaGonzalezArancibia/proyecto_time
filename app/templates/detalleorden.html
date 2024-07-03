@@ -9,9 +9,11 @@
 </head>
 <body>
     <!-- detalleorden.html -->
-<h1 style="text-align: center; background-color: gray;">Detalle de la Orden</h1>
+<h1 style="text-align: center; background-color: gray;">Detalle</h1>
 <hr>
-    <p class="p-4"><a href="{% url 'listadoorden' %}">volver al listado</a></p>
+  <div class="p-5">
+    <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'listadoorden' %}'">Volver a Listado</button>
+  </div>
   
   <div class="p-5">
     <table class="table table-striped" >
@@ -61,7 +63,7 @@
   <br>
   <br>
   <hr>
-  <h2 style="text-align: center; background-color: gray;"">Productos</h2>
+  <h2 style="text-align: center; background-color: gray;">Productos</h2>
   <hr>
   <table class="table table-striped" >
       <thead>
@@ -115,8 +117,13 @@
                   <p>Total a Pagar: {{ orden.TotalAPagar }}</p>
               </td>
         </tr>
+        
       </tbody>
+    
     </table>
+    <div class="p-5">
+      <button type="button" class="btn btn-outline-success" onclick="window.location.href='{% url 'DetalleOrdenPDF' orden.id %}'">Descargar PDF</button>
+    </div>
   </div>
   <p><a href="{% url 'DetalleOrdenPDF' orden.id %}">Descargar orden en PDF</a></p>
 </body>
