@@ -82,20 +82,18 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 
 
 python -m venv myenv
-
-myenv\Scripts\activate
-
-pip install django
-
-django-admin startproject myproject
-
-cd myproject
-
-python manage.py runserver
-
-python manage.py migrate
-
-python manage.py createsuperuser
+1. Crear un entorno virtual:
+Python -m venv nombre_del_entorno
+Activar el entorno virtual:
+En Windows: nombre_del_entorno\Scripts\activate
+En macOS/Linux: source nombre_del_entorno/bin/activateInstalar Django.
+2. Instalar Django: pip install django
+3. Crear un Nuevo Proyecto Django: django-admin startproject nombre_del_proyecto
+4.Ejecutar el Servidor de Desarrollo (cd nombre_del_proyecto) (Python manage.py runserver)
+5. Crear una Aplicación Django: (Python manage.py startapp nombre_de_la_aplicacion)
+6. Ejecutar Migraciones de la Base de Datos (Python manage.py makemigrations) (Python manage.py migrate)
+7. Crear un Superusuario (Python manage.py createsuperuser)
+8.Ejecutar el Servidor de Desarrollo y Acceder a la Interfaz de Administración (Python manage.py runs
 
 
 
