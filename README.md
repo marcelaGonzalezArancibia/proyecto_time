@@ -65,6 +65,7 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 
 - **Lenguaje de Programación:** Python
 - **Framework:** Django
+- - **Base de datos:** sqllite3
 
 ## Instalación
 
