@@ -90,6 +90,7 @@ python manage.py runserver
 ```bash
 python -m venv myenv
 
+```bash
 myenv\Scripts\activate
 
 pip install django
@@ -103,5 +104,7 @@ python manage.py runserver
 python manage.py migrate
 
 python manage.py createsuperuser
+```bash
+
 
 
