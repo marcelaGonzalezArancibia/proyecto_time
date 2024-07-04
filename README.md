@@ -75,22 +75,14 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 
 ### Ingresar a nuestro proyecto
 
-1. Descarga y abre el nuestro proyecto proyecto_time en visual studio code.
-2. Abre la consola cmd desde studio code.
-3. ingresa el siguiente comando.
-   
-```bash
-python manage.py runserver
+1.	Abre el cmd y navega a la carpeta donde deseas crear el proyecto.
+2.	Ejecuta los siguientes comandos para poder levantar el proyecto Django
 
-### Para crear tu propio proyecto puedes seguir estos pasos:
-
-1. Descarga y abre el nuestro proyecto proyecto_time en visual studio code.
-2. Abre la consola cmd desde studio code.
-3. ingresa el siguiente comando.
 ```bash
+
+
 python -m venv myenv
 
-```bash
 myenv\Scripts\activate
 
 pip install django
@@ -104,7 +96,7 @@ python manage.py runserver
 python manage.py migrate
 
 python manage.py createsuperuser
-```bash
+
 
 
 
