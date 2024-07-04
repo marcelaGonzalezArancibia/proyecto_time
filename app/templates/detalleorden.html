@@ -125,9 +125,7 @@
       <button type="button" class="btn btn-outline-success" onclick="window.location.href='{% url 'DetalleOrdenPDF' orden.id %}'">Descargar PDF</button>
     </div>
   </div>
-  
-  
-  
+  <p><a href="{% url 'DetalleOrdenPDF' orden.id %}">Descargar orden en PDF</a></p>
 </body>
 </html>
 
