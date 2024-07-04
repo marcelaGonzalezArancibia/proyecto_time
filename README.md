@@ -86,7 +86,15 @@ git clone https://github.com/marcelaGonzalezArancibia/proyecto_time.git (en el c
 debemos ejecutar "cd proyecto_time" sin comillas   
 debemos ejecutar "pip install django-crispy-forms" sin comillas 
 debemos ejecutar "pip install xhtml2pdf" sin comillas 
-debemos ejecutar "python manage.py runserver" sin comillas 
+debemos ejecutar "python manage.py runserver" sin comillas
+
+luego esto nos dara un mensaje en el cmd el cual es asi
+System check identified 1 issue (0 silenced).
+July 04, 2024 - 14:43:21
+Django version 5.0.6, using settings 'proyectoreloj.settings'
+Starting development server at http://127.0.0.1:8000/ "al hacer  ctrl y clic sobre http://127.0.0.1:8000/ nos llevara a la pagina donde se levanto nuestro poryecto  "
+Quit the server with CTRL-BREAK.
+y ahora podras disfrutar de nuestro proyecto 
 
  
 
