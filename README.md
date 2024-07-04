@@ -82,6 +82,11 @@ Con este alcance del proyecto, se espera lograr un sistema robusto y eficiente q
 ```bash
 python manage.py runserver
 
+### Para crear tu propio proyecto puedes seguir estos pasos:
+
+1. Descarga y abre el nuestro proyecto proyecto_time en visual studio code.
+2. Abre la consola cmd desde studio code.
+3. ingresa el siguiente comando.
 ```bash
 python -m venv myenv
 
