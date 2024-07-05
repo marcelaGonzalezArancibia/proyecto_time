@@ -155,6 +155,8 @@ def modificar(request, orden_id):
         'productos_forms': productos_forms,
         'orden_instance': orden_instance,
     })
+def rectificacion (request):
+    return render (request,'rectificacion.html')
 
 def entrega(request, orden_id):
     orden_obj = get_object_or_404(orden, id=orden_id)

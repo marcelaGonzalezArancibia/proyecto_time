@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import index,crearorden,listadoorden,detalleorden,modificar,entrega,DetalleOrdenPDF
+from .views import index,crearorden,listadoorden,detalleorden,modificar,entrega,DetalleOrdenPDF,rectificacion
 
 urlpatterns = [
     path('', index,name='index'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('modificar/<int:orden_id>/',modificar,name='modificar'),
     path('entrega/<int:orden_id>/',entrega,name='entrega'),
     path('DetalleOrdenPDF/<int:orden_id>/',DetalleOrdenPDF.as_view(), name='DetalleOrdenPDF'),
+    path('rectificacion',rectificacion,name='rectificacion')
 ]
