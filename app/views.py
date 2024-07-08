@@ -4,12 +4,15 @@ from django.shortcuts import render, get_object_or_404
 from .forms import OrdenForm, ProductoOrdenForm,EntregaForm
 from .forms import ProductoOrdenFormSet
 
-
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.views import View
+from django.views.generic import View
 from xhtml2pdf import pisa
-
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from PyPDF2 import PdfReader, PdfWriter
+from io import BytesIO
+##se intala para pdf y gota de agua pip install xhtml2pdf reportlab
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -191,16 +194,17 @@ def entrega(request, orden_id):
         
     return render(request, 'entrega.html', {'form': form, 'orden': orden_obj})
 
+
 class DetalleOrdenPDF(View):
-     def get(self, request, *args, **kwargs):
-            # Obtener la orden y los productos
-        orden_id = kwargs.get('orden_id')  # Obtén el ID de la orden de la URL o como lo tengas
-        Orden = orden.objects.get(pk=orden_id)
-        productos = ProductoOrden.objects.filter(orden=Orden)
+    def get(self, request, *args, **kwargs):
+        # Obtener la orden y los productos
+        orden_id = kwargs.get('orden_id')
+        orden_instance = orden.objects.get(pk=orden_id)
+        productos = ProductoOrden.objects.filter(orden=orden_instance)
 
         # Renderizar la plantilla con los datos
         template_path = 'detalleorden.html'
-        context = {'orden': Orden, 'productos': productos}
+        context = {'orden': orden_instance, 'productos': productos}
         template = get_template(template_path)
         html = template.render(context)
 
@@ -208,10 +212,51 @@ class DetalleOrdenPDF(View):
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="detalle_orden.pdf"'
 
-        # Convertir HTML a PDF
-        pisa_status = pisa.CreatePDF(
-            html, dest=response, encoding='utf-8')
+        # Crear un buffer para almacenar el PDF generado por xhtml2pdf
+        buffer = BytesIO()
+        pisa_status = pisa.CreatePDF(html, dest=buffer, encoding='utf-8')
 
         if pisa_status.err:
             return HttpResponse('Error al generar PDF: %s' % html)
-        return response
+
+        # Mueve el puntero del buffer al inicio
+        buffer.seek(0)
+
+        # Si la orden está anulada, añade la marca de agua
+        if orden_instance.estadoentrega == 'anulada':
+            # Crear un nuevo buffer para el PDF final
+            final_buffer = BytesIO()
+
+            # Leer el contenido del PDF generado por xhtml2pdf
+            pdf_reader = PdfReader(buffer)
+            pdf_writer = PdfWriter()
+
+            # Crear la marca de agua usando reportlab
+            for page_num in range(len(pdf_reader.pages)):
+                page = pdf_reader.pages[page_num]
+
+                packet = BytesIO()
+                can = canvas.Canvas(packet, pagesize=letter)
+                can.setFont("Helvetica-Bold", 50)
+                can.setFillColorRGB(1, 0, 0, alpha=0.3)  # Color rojo, transparencia del 30%
+                can.drawString(300, 400, "ANULADO")
+                can.save()
+
+                # Mover el puntero del buffer al inicio
+                packet.seek(0)
+                new_pdf = PdfReader(packet)
+                page.merge_page(new_pdf.pages[0])
+                pdf_writer.add_page(page)
+
+            # Guardar el PDF final
+            pdf_writer.write(final_buffer)
+
+            # Mover el puntero del buffer final al inicio
+            final_buffer.seek(0)
+            # Copiar el contenido del buffer final al response
+            response.write(final_buffer.read())
+            return response
+        else:
+            # Si no está anulada, devolver el PDF generado por xhtml2pdf
+            response.write(buffer.read())
+            return response
