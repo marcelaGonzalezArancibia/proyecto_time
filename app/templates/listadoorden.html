@@ -40,9 +40,15 @@
           <td><li>{{ orden.estadoentrega }}</li></td>
           <td>
             <div class="p-2">
+              <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'rectificacion' orden.id %}'">re</button>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
               <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'modificar' orden.id %}'">Modificar</button>
             </div>
           </td>
+
           <td>
             <div class="p-2">
               <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'detalleorden' orden.id %}'">Ver Orden</button>

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import orden, ProductoOrden,RechazoHistorial
 from django.shortcuts import render, get_object_or_404
 from .forms import OrdenForm, ProductoOrdenForm,EntregaForm
+from .forms import ProductoOrdenFormSet
+
 
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -155,8 +157,23 @@ def modificar(request, orden_id):
         'productos_forms': productos_forms,
         'orden_instance': orden_instance,
     })
-def rectificacion (request):
-    return render (request,'rectificacion.html')
+
+def rectificacion(request, orden_id):
+    orden_instance = get_object_or_404(orden, id=orden_id)
+
+    if request.method == 'POST':
+        orden_form = OrdenForm(request.POST, instance=orden_instance)
+        formset = ProductoOrdenFormSet(request.POST, instance=orden_instance)
+
+        if orden_form.is_valid() and formset.is_valid():
+            orden_form.save()
+            formset.save()
+            return redirect('detalleorden', orden_id=orden_instance.id)
+    else:
+        orden_form = OrdenForm(instance=orden_instance)
+        formset = ProductoOrdenFormSet(instance=orden_instance)
+
+    return render(request, 'rectificacion.html', {'orden_form': orden_form, 'formset': formset})
 
 def entrega(request, orden_id):
     orden_obj = get_object_or_404(orden, id=orden_id)

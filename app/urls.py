@@ -10,5 +10,5 @@ urlpatterns = [
     path('modificar/<int:orden_id>/',modificar,name='modificar'),
     path('entrega/<int:orden_id>/',entrega,name='entrega'),
     path('DetalleOrdenPDF/<int:orden_id>/',DetalleOrdenPDF.as_view(), name='DetalleOrdenPDF'),
-    path('rectificacion',rectificacion,name='rectificacion')
+    path('rectificacion/<int:orden_id>/',rectificacion,name='rectificacion')
 ]

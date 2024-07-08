@@ -1,6 +1,6 @@
 from django import forms
 from .models import orden, ProductoOrden
-
+from django.forms.models import inlineformset_factory
 
 class OrdenForm(forms.ModelForm):
     class Meta:
@@ -10,6 +10,7 @@ class OrdenForm(forms.ModelForm):
             'correovendedor', 'nombrecliente', 'rutcliente', 'direccioncliente', 'correo',
             'telefonoc', 'valorNeto', 'iva', 'valorenvio', 'TotalAPagar'
         ]
+        
         widgets = {
             'nombrevendedor': forms.TextInput(attrs={'class': 'form-control'}),
             'rutvendedor': forms.TextInput(attrs={'class': 'form-control'}),
@@ -50,4 +51,9 @@ class EntregaForm(forms.ModelForm):
         widgets = {
             'motivo_rechazo': forms.Textarea(attrs={'rows': 3}),
         }
-      
+
+ProductoOrdenFormSet = inlineformset_factory(
+    orden, ProductoOrden,
+    form=ProductoOrdenForm,
+    extra=6, can_delete=True
+)

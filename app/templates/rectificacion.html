@@ -1,0 +1,95 @@
+<html>
+<head>
+    <title>Modificar Orden de Compra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Modificar Orden de Compra</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ orden_form.as_p }}
+
+            {{ formset.management_form }}
+
+            <div id="productos-formset">
+                {% for form in formset %}
+                    <div class="form-row producto-form">
+                        {{ form.as_p }}
+                        {% if form.instance.id %}
+                            <label for="{{ form.prefix }}-DELETE">Eliminar:</label>
+                            {{ form.DELETE }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Fila de referencia invisible -->
+            <div id="empty-form" class="form-row" style="display: none;">
+                {{ formset.empty_form.as_p }}
+            </div>
+
+            <button type="button" id="add-product" class="btn btn-secondary">Agregar Producto</button>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var form_idx = {{ formset.total_form_count }};
+
+            // Función para agregar fila de producto
+            $('#add-product').click(function() {
+                var new_form = $('#empty-form').clone(true);
+                new_form.removeAttr('id').removeAttr('style').addClass('producto-form').html(function(i, oldHTML) {
+                    return oldHTML.replace(/__prefix__/g, form_idx);
+                });
+                $('#productos-formset').append(new_form);
+                form_idx++;
+            });
+
+            // Función para eliminar fila de producto
+            $('#productos-formset').on('click', '.delete-row', function() {
+                $(this).closest('.producto-form').remove();
+                calcularTotal(); // Recalcular totales después de eliminar
+            });
+
+            // Función para calcular totales
+            function calcularTotal() {
+                var totalGeneral = 0;
+
+                $('.producto-form').each(function() {
+                    var cantidad = parseFloat($(this).find('input[id$="cantidad"]').val()) || 0;
+                    var precio = parseFloat($(this).find('input[id$="preciounidad"]').val()) || 0;
+                    var totalFila = cantidad * precio;
+                    $(this).find('input[id$="totalproducto"]').val(totalFila.toFixed(2));
+                    totalGeneral += totalFila;
+                });
+
+                var valorNeto = totalGeneral.toFixed(2);
+                $('#id_valorNeto').val(valorNeto);
+
+                var porcentajeIVA = parseFloat($('#id_iva').val()) || 0;
+             
+
+                var valorenvio = parseFloat($('#id_valorenvio').val()) || 0;
+             
+
+                var valorIVA = totalGeneral * (porcentajeIVA / 100);
+                var totalAPagar = totalGeneral + valorIVA + valorenvio;
+                $('#id_TotalAPagar').val(totalAPagar.toFixed(2));
+            }
+
+            // Calcular totales al cargar la página
+            calcularTotal();
+
+            // Escuchar cambios en inputs para recalcular totales
+            $('#productos-formset').on('input', 'input[id$="cantidad"], input[id$="preciounidad"], input[id$="iva"], input[id$="valorenvio"]', function() {
+                calcularTotal();
+            });
+        });
+    </script>
+</body>
+</html>
+
