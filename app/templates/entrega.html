@@ -27,7 +27,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownEstadoEntrega">
                         {% for choice in form.estadoentrega.field.choices %}
                             <li>
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('id_estadoentrega').value='{{ choice.0 }}'; document.getElementById('dropdownEstadoEntrega').innerHTML='{{ choice.1 }}';">
+                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('id_estadoentrega').value='{{ choice.0 }}'; document.getElementById('dropdownEstadoEntrega').innerHTML='{{ choice.1 }}'; mostrarCampos('{{ choice.0 }}');">
                                     {{ choice.1 }}
                                 </a>
                             </li>
@@ -37,40 +37,41 @@
                 <input type="hidden" name="estadoentrega" id="id_estadoentrega" value="{{ form.estadoentrega.value|default_if_none:'' }}">
             </div>
 
-
             <hr>
             
-            <div class="form-group row align-items-center">
-                <label for="id_motivo_rechazo" class="col-form-label col-sm-3">Motivo de Rechazo:</label>
-                <div >
-                    <input type="textarea" class="form-control" name="motivo_rechazo" id="id_motivo_rechazo" value="{{ form.motivo_rechazo.value|default_if_none:'' }}" style="border-radius: 10px; width: 300px;">
+            <div id="entrega-campos-rut-direccion-foto" style="display: none;">
+                <div>
+                    <label for="id_direccion_entrega">Dirección de Entrega:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="direccion_entrega" id="id_direccion_entrega" value="{{ form.direccion_entrega.value|default_if_none:'' }}" style="border-radius: 10px;width: 300px;">
+                    </div>
                 </div>
+            
+                <hr>
+                <div>
+                    <label for="id_rut_receptor">RUT del Receptor:</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" name="rut_receptor" id="id_rut_receptor" value="{{ form.rut_receptor.value|default_if_none:'' }}" style="border-radius: 10px; width: 300px;">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="id_foto_entrega">Foto de Entrega:</label>
+                    <input type="file" name="foto_entrega" id="id_foto_entrega">
+                </div>
+                <hr>
             </div>
 
-            <hr>
+            <div id="entrega-campos-motivo-rechazo" style="display: none;">
+                <div class="form-group row align-items-center">
+                    <label for="id_motivo_rechazo" class="col-form-label col-sm-3">Motivo de Rechazo:</label>
+                    <div>
+                        <input type="textarea" class="form-control" name="motivo_rechazo" id="id_motivo_rechazo" value="{{ form.motivo_rechazo.value|default_if_none:'' }}" style="border-radius: 10px; width: 300px;">
+                    </div>
+                </div>
+                <hr>
+            </div>
 
-            <div >
-                <label for="id_direccion_entrega"  >Dirección de Entrega:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="direccion_entrega" id="id_direccion_entrega" value="{{ form.direccion_entrega.value|default_if_none:'' }}"  style="border-radius: 10px;width: 300px;">
-                </div>
-            </div>
-        
-            <hr>
-            <div >
-                <label for="id_rut_receptor">RUT del Receptor:</label>
-                <div class="col-sm-1">
-                    <input type="text" class="form-control" name="rut_receptor" id="id_rut_receptor" value="{{ form.rut_receptor.value|default_if_none:'' }}" style="border-radius: 10px; width: 300px;">
-                </div>
-            </div>
-            <hr>
-            <div class="form-group">
-                <label for="id_foto_entrega">Foto de Entrega:</label>
-                <input type="file" name="foto_entrega" id="id_foto_entrega">
-            </div>
-            <hr>
-            
-            
             <button type="submit" class="btn btn-success">Guardar Cambios</button>
         </div>
     </form>
@@ -82,10 +83,10 @@
         <table class="table">
             <tbody>
                 {% for rechazo in orden.rechazos.all %}
-            <tr>
-                <td>{{ forloop.counter }}.-Motivo de Rechazo: {{ rechazo.motivo }}</td>
-            </tr>
-            {% endfor %}
+                    <tr>
+                        <td>{{ forloop.counter }}.-Motivo de Rechazo: {{ rechazo.motivo }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -96,30 +97,62 @@
         </div>
         <table class="table">
             <tbody>
-            <tr>
-                <td>Estado Entrega: {{orden.estadoentrega}}</td>
-            </tr>
-            <tr>
-                <td>Rut Receptor: {{orden.rut_receptor}}</td>
-            </tr>
-            <tr>
-                <td>Direccion: {{orden.direccion_entrega}}</td>
-            </tr>
-            <tr>
-                <td>Evidencia Entrega: 
-                    {% if orden.foto_entrega %}
-                    <p>Foto de entrega:</p>
-                    <img src="{{ orden.foto_entrega.url }}" alt="Foto de entrega">
-                    {% else %}
-                    <p>No hay foto de entrega disponible.</p>
-                    {% endif %}
-                </td>
-            </tr>
+                <tr>
+                    <td>Estado Entrega: {{orden.estadoentrega}}</td>
+                </tr>
+                <tr>
+                    <td>Rut Receptor: {{orden.rut_receptor}}</td>
+                </tr>
+                <tr>
+                    <td>Direccion: {{orden.direccion_entrega}}</td>
+                </tr>
+                <tr>
+                    <td>Evidencia Entrega: 
+                        {% if orden.foto_entrega %}
+                            <p>Foto de entrega:</p>
+                            <img src="{{ orden.foto_entrega.url }}" alt="Foto de entrega">
+                        {% else %}
+                            <p>No hay foto de entrega disponible.</p>
+                        {% endif %}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-<!-- Asegúrate de incluir los scripts de Bootstrap si aún no lo has hecho -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Asegúrate de incluir los scripts de Bootstrap y Popper si aún no lo has hecho -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+    function mostrarCampos(estado) {
+        var camposRutDireccionFoto = document.getElementById('entrega-campos-rut-direccion-foto');
+        var camposMotivoRechazo = document.getElementById('entrega-campos-motivo-rechazo');
+
+        if (estado === 'entregada' || estado === 'por_entregar') {
+            camposRutDireccionFoto.style.display = 'block';
+            camposMotivoRechazo.style.display = 'none';
+        } else if (estado === 'rechazada') {
+            camposRutDireccionFoto.style.display = 'none';
+            camposMotivoRechazo.style.display = 'block';
+        } else {
+            camposRutDireccionFoto.style.display = 'none';
+            camposMotivoRechazo.style.display = 'none';
+        }
+    }
+
+    // Llama a mostrarCampos al cargar la página para configurar correctamente los campos según el estado actual
+    document.addEventListener('DOMContentLoaded', function() {
+        var estadoActual = '{{ form.estadoentrega.value|default_if_none:"" }}';
+        mostrarCampos(estadoActual);
+
+        if (estadoActual === 'entregada') {
+            document.getElementById('dropdownEstadoEntrega').classList.add('disabled');
+            document.getElementById('id_direccion_entrega').readOnly = true;
+            document.getElementById('id_rut_receptor').readOnly = true;
+            document.getElementById('id_foto_entrega').disabled = true;
+            document.querySelector('button[type="submit"]').disabled = true;
+        }
+    });
+    </script>
 </body>
 </html>

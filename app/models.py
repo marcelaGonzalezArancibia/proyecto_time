@@ -56,7 +56,8 @@ class orden(models.Model):
     ESTADOENTREGA_CHOICES = (
         ('por entregar', 'por entregar'),
         ('entregada', 'entregada'),
-        ('rechazada', 'rechazada'),    
+        ('rechazada', 'rechazada'), 
+       
     )
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='creada')
     estadoentrega=models.CharField(max_length=20, choices=ESTADOENTREGA_CHOICES, default='por entregar')
