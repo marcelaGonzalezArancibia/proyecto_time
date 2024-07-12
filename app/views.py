@@ -161,6 +161,7 @@ def modificar(request, orden_id):
         'orden_instance': orden_instance,
     })
 
+
 def rectificacion(request, orden_id):
     orden_instance = get_object_or_404(orden, id=orden_id)
 
@@ -169,16 +170,16 @@ def rectificacion(request, orden_id):
         formset = ProductoOrdenFormSet(request.POST, instance=orden_instance)
 
         if orden_form.is_valid() and formset.is_valid():
+            # Cambia el estado a 'rectificada'
+            orden_instance.estado = 'rectificada'
             orden_form.save()
             formset.save()
             return redirect('detalleorden', orden_id=orden_instance.id)
-        
     else:
         orden_form = OrdenForm(instance=orden_instance)
         formset = ProductoOrdenFormSet(instance=orden_instance)
 
     return render(request, 'rectificacion.html', {'orden_form': orden_form, 'formset': formset})
-
 def entrega(request, orden_id):
     orden_obj = get_object_or_404(orden, id=orden_id)
 
