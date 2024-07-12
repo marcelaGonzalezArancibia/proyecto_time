@@ -23,7 +23,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-         
           <th scope="col" style="background-color: rgb(139, 169, 161);">Codigo orden</th>
           <th scope="col" style="background-color: rgb(139, 169, 161);">Estado de rectificaciones</th>
           <th scope="col" style="background-color: rgb(139, 169, 161);">Estado de entrega</th>
@@ -36,35 +35,45 @@
         {% for orden in ordenes %}
         <tr>
           <td>Orden: {{ orden.id }}</td>
-          <td><li>{{ orden.estado }}</li></td>
-          <td><li>{{ orden.estadoentrega }}</li></td>
-          <td>
-            <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'rectificacion' orden.id %}'">re</button>
-            </div>
-          </td>
-          <td>
-            <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'modificar' orden.id %}'">Modificar</button>
-            </div>
-          </td>
+          <td style="
+          {% if orden.estado  == 'creada' %} background-color: rgb(231, 215, 22 ); 
+          {% elif orden.estado  == 'rectificada' %} background-color: rgb(231, 60, 22); 
+         
+          {% endif %} ">{{ orden.estado }}</td>
 
+          
+          
+          <td style="
+              {% if orden.estadoentrega == 'por entregar' %} background-color: rgb(199, 244, 241); 
+              {% elif orden.estadoentrega == 'entregada' %} background-color: rgb(221, 255, 51); 
+              {% elif orden.estadoentrega == 'rechazada' %} background-color:  rgb(243, 124, 94 ); 
+              {% elif orden.estadoentrega == 'anulada' %} background-color: rgb(232, 166, 87 ); 
+              {% endif %} ">{{ orden.estadoentrega }}</td>
           <td>
             <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'detalleorden' orden.id %}'">Ver Orden</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'rectificacion' orden.id %}'">re</button>
             </div>
           </td>
           <td>
             <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary " onclick="window.location.href='{% url 'entrega' orden.id %}'">Entrega</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'modificar' orden.id %}'">Modificar</button>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'detalleorden' orden.id %}'">Ver Orden</button>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'entrega' orden.id %}'">Entrega</button>
             </div>
           </td>
         </tr>
         {% endfor %}
-       
       </tbody>
     </table>
-    
+   
   </div>
   <ul>
    
