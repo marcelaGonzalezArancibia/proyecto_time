@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import orden, ProductoOrden,RechazoHistorial
 from django.shortcuts import render, get_object_or_404
 from .forms import OrdenForm, ProductoOrdenForm,EntregaForm
-from .forms import ProductoOrdenFormSet
+from .forms import ProductoOrdenFormSet, get_producto_orden_formset
 
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -12,6 +12,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from PyPDF2 import PdfReader, PdfWriter
 from io import BytesIO
+from django.forms import formset_factory
 ##se intala para pdf y gota de agua pip install xhtml2pdf reportlab
 # Create your views here.
 def index(request):
@@ -74,7 +75,7 @@ def crearorden(request):
                 preciounidad=int(precio),
                 totalproducto=float(totalproducto)
             )
-        return redirect('crearorden')  # Redirige a una página de éxito o la página que desees
+        return redirect('listadoorden')  # Redirige a una página de éxito o la página que desees
 
     return render(request, 'crearorden.html')
 
@@ -162,15 +163,14 @@ def modificar(request, orden_id):
     })
 
 
+
 def rectificacion(request, orden_id):
     orden_instance = get_object_or_404(orden, id=orden_id)
 
     if request.method == 'POST':
         orden_form = OrdenForm(request.POST, instance=orden_instance)
         formset = ProductoOrdenFormSet(request.POST, instance=orden_instance)
-
         if orden_form.is_valid() and formset.is_valid():
-            # Cambia el estado a 'rectificada'
             orden_instance.estado = 'rectificada'
             orden_form.save()
             formset.save()
@@ -179,7 +179,12 @@ def rectificacion(request, orden_id):
         orden_form = OrdenForm(instance=orden_instance)
         formset = ProductoOrdenFormSet(instance=orden_instance)
 
-    return render(request, 'rectificacion.html', {'orden_form': orden_form, 'formset': formset})
+    return render(request, 'rectificacion.html', {
+        'orden_form': orden_form,
+        'formset': formset,
+    })
+
+
 def entrega(request, orden_id):
     orden_obj = get_object_or_404(orden, id=orden_id)
 
