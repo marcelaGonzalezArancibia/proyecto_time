@@ -104,65 +104,6 @@ def detalleorden(request, orden_id):
 
 
 
-def modificar(request, orden_id):
-    orden_instance = get_object_or_404(orden, id=orden_id)
-    productos_instance = ProductoOrden.objects.filter(orden=orden_instance)
-
-    if request.method == 'POST':
-        orden_form = OrdenForm(request.POST, instance=orden_instance)
-        productos_forms = []
-
-        for producto_instance in productos_instance:
-            producto_form = ProductoOrdenForm(
-                request.POST,
-                instance=producto_instance,
-                prefix=f'producto-{producto_instance.id}'
-            )
-            productos_forms.append(producto_form)
-
-        if orden_form.is_valid() and all(form.is_valid() for form in productos_forms):
-            orden_instance = orden_form.save(commit=False)
-            total_valor_neto = 0
-            for form in productos_forms:
-                producto = form.save(commit=False)
-                producto.totalproducto = producto.cantidad * producto.preciounidad
-                producto.save()
-                total_valor_neto += producto.totalproducto
-
-            orden_instance.valorNeto = total_valor_neto
-
-            # Calcular TotalAPagar
-            iva_porcentaje = float(orden_form.cleaned_data['iva'])
-            valor_envio = float(orden_form.cleaned_data['valorenvio'])
-            valor_iva = total_valor_neto * (iva_porcentaje / 100)
-            total_pagar = total_valor_neto + valor_envio + valor_iva
-
-            orden_instance.TotalAPagar = total_pagar
-            
-            # Verificar si se presionó el botón de modificar para activar el estado "Rectificada"
-            if 'modificar' in request.POST:
-                orden_instance.estado = 'rectificada'
-            
-            orden_instance.save()
-            
-            return redirect('detalleorden', orden_id=orden_instance.id)
-
-    else:
-        orden_form = OrdenForm(instance=orden_instance)
-        productos_forms = [
-            ProductoOrdenForm(
-                instance=producto_instance,
-                prefix=f'producto-{producto_instance.id}'
-            ) for producto_instance in productos_instance
-        ]
-
-    return render(request, 'modificar.html', {
-        'orden_form': orden_form,
-        'productos_forms': productos_forms,
-        'orden_instance': orden_instance,
-    })
-
-
 
 def rectificacion(request, orden_id):
     orden_instance = get_object_or_404(orden, id=orden_id)

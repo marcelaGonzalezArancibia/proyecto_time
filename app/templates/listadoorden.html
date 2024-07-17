@@ -51,12 +51,7 @@
               {% endif %} ">{{ orden.estadoentrega }}</td>
           <td>
             <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'rectificacion' orden.id %}'">re</button>
-            </div>
-          </td>
-          <td>
-            <div class="p-2">
-              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'modificar' orden.id %}'">Modificar</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url 'rectificacion' orden.id %}'">Rectificacion</button>
             </div>
           </td>
           <td>
