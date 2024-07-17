@@ -86,7 +86,7 @@ git clone https://github.com/marcelaGonzalezArancibia/proyecto_time.git (en el c
 debemos ejecutar "cd proyecto_time" sin comillas   
 debemos ejecutar "pip install django-crispy-forms" sin comillas 
 debemos ejecutar "pip install xhtml2pdf" sin comillas
-debemos ejecutar "pip install PyPDF2"
+debemos ejecutar "pip install PyPDF2" sin comillas
 debemos ejecutar "python manage.py runserver" sin comillas
 
 luego esto nos dara un mensaje en el cmd el cual es asi
