@@ -46,11 +46,11 @@
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Telefono:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="telefonov" required></div>
+                                <div class="col-8"><input type="number" class="form-control" name="telefonov" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Correo:</p>
-                                <div class="col-8"><input type="text" class="form-control" name="correovendedor" required></div>
+                                <div class="col-8"><input type="email" class="form-control" name="correovendedor" required></div>
                             </div>
                         </div>
                     </div>
@@ -72,11 +72,11 @@
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Correo:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="correo" required></div>
+                                <div class="col-8"> <input type="email" class="form-control" name="correo" required></div>
                             </div>
                             <div class="form-group row">
                                 <p class="col-4">Telefono:</p>
-                                <div class="col-8"> <input type="text" class="form-control" name="telefonoc" required></div>
+                                <div class="col-8"> <input type="number" class="form-control" name="telefonoc" required></div>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td> <input id="valorenvio" type="text" name="valorenvio" class="form-control" oninput="calcularTotal()" required></td>
+                    <td> <input id="valorenvio" type="text" name="valorenvio" class="form-control" oninput="calcularTotal()" value="0"></td>
                     <td> <input id="iva" type="text" name="iva" class="form-control" oninput="calcularTotal()" required></td>
                     <td><input id="valorNeto" name="valorNeto" class="form-control"></td>
                     <td><input id="TotalAPagar" type="text" class="form-control" name="TotalAPagar" value="0"></td>
